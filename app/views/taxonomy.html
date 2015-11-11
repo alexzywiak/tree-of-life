@@ -1,0 +1,23 @@
+<div class="container">
+    <br>
+    <br>
+    <section>
+    	<div class="row">
+    	    <div class="col s12">
+    	        <div class="card deep-purple">
+    	            <div class="card-content white-text">
+    	                <br>
+    	                <span class="card-title">{{ root.complete_name }}</span>
+    	            </div>
+    	        </div>
+    	    </div>
+    	</div>
+    </section>
+    <section>
+    	<div class="row">
+    		<div ng-repeat="child in children" class="col s2">
+    			<a href="#/taxonomy/{{child.tsn}}">{{child.complete_name}}</a>
+    		</div>
+    	</div>
+    </section>
+</div>

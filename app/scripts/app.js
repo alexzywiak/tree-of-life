@@ -23,9 +23,9 @@ angular
         templateUrl: 'views/main.html',
         controller: 'MainCtrl'
       })
-      .state('about', {
-        url: '/about',
-        templateUrl: 'views/about.html',
-        controller: 'AboutCtrl'
+      .state('taxonomy', {
+        url: '/taxonomy/:tsn',
+        templateUrl: 'views/taxonomy.html',
+        controller: 'TaxonomyCtrl'
       });
   });
