@@ -11,7 +11,8 @@ angular.module('angularApp')
   .factory('taxonFactory', function($http) {
     
     var root = {
-        complete_name: 'Tree'
+        complete_name: 'Tree',
+        tsn: 0
     };
 
     var children = [];
