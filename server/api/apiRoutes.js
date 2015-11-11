@@ -7,7 +7,11 @@ var kingdoms = function() {
 
 // Get taxon unit
 var taxonUnit = function(tsn) {
-  return db.runQuery('SELECT complete_name, tsn, parent_tsn FROM taxonomic_units where tsn=' + tsn);
+  return db.runQuery(
+  	'SELECT tu.complete_name, tu.tsn, tu.parent_tsn, tt.rank_name ' + 
+  	'FROM taxonomic_units tu, taxon_unit_types tt ' + 
+  	'WHERE tu.tsn=? && tt.rank_id=tu.rank_id && tt.kingdom_id=tu.kingdom_id;', [tsn]
+  	);
 };
 
 // Gets all children of the current tsn

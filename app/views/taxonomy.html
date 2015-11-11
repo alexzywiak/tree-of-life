@@ -2,24 +2,26 @@
     <br>
     <br>
     <section>
-    	<div class="row">
-    	    <div class="col s12">
-    	        <div class="card deep-purple">
-    	            <div class="card-content white-text">
-    	                <br>
-    	                <span class="card-title">{{ taxon.complete_name }}</span>
-    	                <br>
-											<a href="#/taxonomy/{{taxon.parent_tsn}}">Back</a>
-    	            </div>
-    	        </div>
-    	    </div>
-    	</div>
+        <div class="row">
+            <div class="col s12">
+                <div class="card deep-purple">
+                    <div class="card-content white-text">
+                        <br>
+                        <span>{{ taxon.rank_name }}</span>
+                        <br>
+                        <span class="card-title">{{ taxon.complete_name }}</span>
+                        <br>
+                        <a href="#/taxonomy/{{taxon.parent_tsn}}">Back</a>
+                    </div>
+                </div>
+            </div>
+        </div>
     </section>
     <section>
-    	<div class="row">
-    		<div ng-repeat="child in children" class="col s2">
-    			<a href="#/taxonomy/{{child.tsn}}">{{child.complete_name}}</a>
-    		</div>
-    	</div>
+        <div class="row">
+            <div ng-repeat="child in children" class="col s2">
+                <a href="#/taxonomy/{{child.tsn}}">{{child.complete_name}}</a>
+            </div>
+        </div>
     </section>
 </div>

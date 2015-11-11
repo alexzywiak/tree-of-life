@@ -11,8 +11,9 @@ db.connect();
 
 module.exports = {
   runQuery: function(query, data) {
+    data = data || [];
     return new Promise(function(resolve, reject) {
-      db.query(query, function(err, rows, fields) {
+      db.query(query, data, function(err, rows, fields) {
         if (err) {
           reject(err)
         }

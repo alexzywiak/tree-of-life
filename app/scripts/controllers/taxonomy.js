@@ -17,6 +17,7 @@ angular.module('angularApp')
 
       $scope.taxon = {
         complete_name: 'Tree',
+        rank_name: 'All the Life.  Ever',
         tsn: 0
       };
 
@@ -33,6 +34,7 @@ angular.module('angularApp')
       // Set parent by tsn
       $scope.taxonUnit($stateParams.tsn)
         .then(function(result) {
+        	console.log(result);
           $scope.taxon = result;
         });
 
