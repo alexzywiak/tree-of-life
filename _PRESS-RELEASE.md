@@ -17,28 +17,29 @@ Once the project moves into development, the press release can be used as a touc
  -->
  
 ## Heading ##
-  > Name the product in a way the reader (i.e. your target customers) will understand.
+  > Tree of Life
+	
 
 ## Sub-Heading ##
-  > Describe who the market for the product is and what benefit they get. One sentence only underneath the title.
+  > A simple and elegant tool for education and reference.
 
 ## Summary ##
-  > Give a summary of the product and the benefit. Assume the reader will not read anything else so make this paragraph good.
+  > Tree of Life gives users an opportunity to explore and visualise the structure of the scientific classification of life on Earth.  It is a simple way to move through the hierarchy of living things and glean insight into how the organismal web of life is woven.
 
 ## Problem ##
-  > Describe the problem your product solves.
+  > This product offers a concise and appealing method to reference and explore iformation about how living things are classified.
 
 ## Solution ##
-  > Describe how your product elegantly solves the problem.
+  > By creating a simple intuitive interface couple with an attractive design, Tree of Life makes it easy and enjoyable to move through the web of all living things.
 
 ## Quote from You ##
-  > A quote from a spokesperson in your company.
+  > "This is the best thing to happen to Organismal Biology since Carl Linnaeus' Systema Naturae.  And that was almost 300 years ago.  You're welcome." - Me
 
 ## How to Get Started ##
-  > Describe how easy it is to get started.
+  > Just open it up, and start exploring.
 
 ## Customer Quote ##
-  > Provide a quote from a hypothetical customer that describes how they experienced the benefit.
+  > "If it wasn't for Tree of Life, I wouldn't know Cnidaria from Placozoa.  It has saved me so from many embarrassing moments when discussing various phyla of sea sponges at dinner parties.  Thanks Tree of Life!" - A real person
 
 ## Closing and Call to Action ##
-  > Wrap it up and give pointers where the reader should go next.
+  > Tree of Life helps shed light on all facets of the intricate web of life of which we are yet a tiny slice...
