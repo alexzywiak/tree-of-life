@@ -11,6 +11,8 @@
                         <br>
                         <span class="card-title">{{ taxon.complete_name }}</span>
                         <br>
+                        <img src="{{ taxon.wiki.thumbnail.source }}" alt="">
+                        <p>{{ taxon.wiki.extract }}</p>
                         <a href="#/taxonomy/{{taxon.parent_tsn}}">Back</a>
                     </div>
                 </div>

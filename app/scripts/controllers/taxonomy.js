@@ -10,9 +10,12 @@
 angular.module('angularApp')
   .controller('TaxonomyCtrl', function($scope, $stateParams, taxonFactory, wikiFactory) {
 
-    angular.extend($scope, taxonFactory);
+    angular.extend($scope, taxonFactory, wikiFactory);
 
-    wikiFactory.getImage('animalia');
+    // wikiFactory.getWiki('animalia')
+    //   .then(function(results){
+    //     console.log(results);
+    //   });
     
     // Initialize
     if (!$stateParams.tsn || $stateParams.tsn === '0') {
@@ -36,6 +39,11 @@ angular.module('angularApp')
       $scope.taxonUnit($stateParams.tsn)
         .then(function(result) {
           $scope.taxon = result;
+
+          $scope.getWiki($scope.taxon.complete_name)
+            .then(function(data){
+              $scope.taxon.wiki = data;
+            });
         });
 
       // Get all children

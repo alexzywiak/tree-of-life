@@ -12,27 +12,43 @@ angular.module('angularApp')
 
     var wikiUrl = "http://en.wikipedia.org/w/api.php?action=query&format=json&callback=JSON_CALLBACK";
 
-    var getExtract = function(title) {
-
+    var buildQuery = function(obj) {
+      var url = wikiUrl;
+      for (var key in obj) {
+        url += '&' + key + '=' + obj[key];
+      }
+      return url;
     };
 
-    var getImage = function(title) {
-      $http({
-        url: wikiUrl,
-        method: 'JSONP',
-        params: {
-          titles: title,
-          prop: "pageimages",
-          pithumbsize: 150,
-          redirects: true
+    function parseData(data, target) {
+      for (var prop in data.query.pages) {
+        if (data.query.pages[prop][target] !== undefined) {
+          return data.query.pages[prop];
         }
+      }
+      return undefined;
+    }
+
+    var getWiki = function(title) {
+      console.log(title);
+      var url = buildQuery({
+        titles: title,
+        prop: "pageimages|extracts",
+        pithumbsize: 500,
+        redirects: true,
+        exintro: true,
+        explaintext: true,
+      });
+
+      return $http({
+        url: url,
+        method: 'jsonp'
       }).then(function(results) {
-        console.log(results);
+        return parseData(results.data, 'extract');
       });
     };
 
     return {
-      getExtract: getExtract,
-      getImage: getImage
+      getWiki: getWiki
     }
   });
