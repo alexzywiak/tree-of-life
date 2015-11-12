@@ -8,10 +8,12 @@
  * Controller of the angularApp
  */
 angular.module('angularApp')
-  .controller('TaxonomyCtrl', function($scope, $stateParams, taxonFactory) {
+  .controller('TaxonomyCtrl', function($scope, $stateParams, taxonFactory, wikiFactory) {
 
     angular.extend($scope, taxonFactory);
 
+    wikiFactory.getImage('animalia');
+    
     // Initialize
     if (!$stateParams.tsn || $stateParams.tsn === '0') {
 
