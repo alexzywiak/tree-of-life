@@ -3,19 +3,8 @@
     <br>
     <section>
         <div class="row">
-            <div class="col s12">
-                <div class="card deep-purple">
-                    <div class="card-content white-text">
-                        <br>
-                        <span>{{ taxon.rank_name }}</span>
-                        <br>
-                        <span class="card-title">{{ taxon.complete_name }}</span>
-                        <br>
-                        <img src="{{ taxon.wiki.thumbnail.source }}" alt="">
-                        <p>{{ taxon.wiki.extract }}</p>
-                        <a href="#/taxonomy/{{taxon.parent_tsn}}">Back</a>
-                    </div>
-                </div>
+            <div class="col s6 offset-s3">
+                <big-card taxon="taxon"></big-card>
             </div>
         </div>
     </section>

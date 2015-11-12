@@ -1,0 +1,16 @@
+<div class="card large">
+    <div class="card-image">
+        <img src="{{ taxon.wiki.thumbnail.source }}" alt="">
+        <span class="card-title overlay">
+            <span>{{ taxon.rank_name }}</span>
+            <h4>{{ taxon.complete_name }}</h4>
+        </span>
+    </div>
+    <div class="card-content overflow-scroll">
+        <a href="#/taxonomy/{{taxon.parent_tsn}}">Back</a>
+        <div class="overflow-scroll">
+            <p>{{ taxon.wiki.extract }}</p>
+        </div>
+    </div>
+    <br>
+</div>

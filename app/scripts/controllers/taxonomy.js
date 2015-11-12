@@ -11,11 +11,6 @@ angular.module('angularApp')
   .controller('TaxonomyCtrl', function($scope, $stateParams, taxonFactory, wikiFactory) {
 
     angular.extend($scope, taxonFactory, wikiFactory);
-
-    // wikiFactory.getWiki('animalia')
-    //   .then(function(results){
-    //     console.log(results);
-    //   });
     
     // Initialize
     if (!$stateParams.tsn || $stateParams.tsn === '0') {
