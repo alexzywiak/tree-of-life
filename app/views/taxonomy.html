@@ -20,6 +20,8 @@
     <section>
         <div class="row">
             <div ng-repeat="child in children" class="col s2">
+                <span>{{ child.rank_name }}</span>
+                <br>
                 <a href="#/taxonomy/{{child.tsn}}">{{child.complete_name}}</a>
             </div>
         </div>

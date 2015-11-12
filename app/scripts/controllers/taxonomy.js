@@ -21,11 +21,10 @@ angular.module('angularApp')
         tsn: 0
       };
 
-      console.log($scope.taxon);
-
-      $scope.kingdoms()
-        .then(function(data) {
-          $scope.children = data;
+      // Get all children
+      $scope.taxonChildren(0)
+        .then(function(results) {
+          $scope.children = results;
         });
 
       // Search for specific tsn
@@ -34,7 +33,6 @@ angular.module('angularApp')
       // Set parent by tsn
       $scope.taxonUnit($stateParams.tsn)
         .then(function(result) {
-        	console.log(result);
           $scope.taxon = result;
         });
 
@@ -44,7 +42,4 @@ angular.module('angularApp')
           $scope.children = results;
         });
     }
-
-
-
   });
