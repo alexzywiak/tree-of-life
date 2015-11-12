@@ -10,19 +10,15 @@
  */
 angular
   .module('angularApp', [
-    'ngAnimate',
-    'ui.router'
+    // 'ngAnimate',
+    'ui.router',
+    'ngFx'
   ])
   .config(function($stateProvider, $urlRouterProvider, $httpProvider) {
 
-    $urlRouterProvider.otherwise('/');
+    $urlRouterProvider.otherwise('/taxonomy/0');
 
     $stateProvider
-      .state('main', {
-        url: '/',
-        templateUrl: 'views/main.html',
-        controller: 'MainCtrl'
-      })
       .state('taxonomy', {
         url: '/taxonomy/:tsn',
         templateUrl: 'views/taxonomy.html',

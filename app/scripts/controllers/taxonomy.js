@@ -37,7 +37,6 @@ angular.module('angularApp')
       $scope.taxonUnit($stateParams.tsn)
         .then(function(result) {
           $scope.taxon = result;
-          console.log(result.hierarchy);
         });
 
       // Set Children

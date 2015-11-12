@@ -13,6 +13,9 @@
                     </div>
                 </div>
             </section>
+            <div class="row">
+                <div class="col s6 border-right"></div>
+            </div>
             <section>
                 <div class="row">
                     <div class="col s8 offset-s2">
@@ -20,37 +23,16 @@
                     </div>
                 </div>
             </section>
+            <div class="row">
+                <div class="col s6 border-right"></div>
+            </div>
             <section>
                 <div class="row">
-                    <div ng-repeat="child in children" class="col s4">
+                    <div ng-repeat="child in children" class="col s4 fx-zoom-left">
                         <small-card taxon="child"></small-card>
                     </div>
                 </div>
             </section>
         </div>
     </div>
-<!--     <section>
-        <div class="row">
-            <div class="col s4 offset-s4">
-                <small-card taxon="parent"></small-card>
-            </div>
-        </div>
-    </section>
-    <section>
-        <div class="row">
-            <div class="col s2">
-                <hierarchy list="taxon.hierarchy"></hierarchy>
-            </div>
-            <div class="col s6 offset-s1">
-                <big-card taxon="taxon"></big-card>
-            </div>
-        </div>
-    </section>
-    <section>
-        <div class="row">
-            <div ng-repeat="child in children" class="col s4">
-                <small-card taxon="child"></small-card>
-            </div>
-        </div>
-    </section> -->
 </div>
