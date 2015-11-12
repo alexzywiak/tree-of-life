@@ -7,17 +7,22 @@
 }
 
 .chip-large{
+	color: #FFFFFF;
 	margin-top: 16px;
 	height: 72px;
 	line-height: 72px;
 	border-radius: 36px;
+	width: 100%;
+	text-align:center;
 }
 
 .chip-large img{
+	box-sizing: border-box;
+	border: 2px solid #4caf50;
 	height: 72px;
 	width: 72px;
 }
 
-.chip-large span{
-	padding: 0 16px;
+.rank-list span{
+	display: block;
 }

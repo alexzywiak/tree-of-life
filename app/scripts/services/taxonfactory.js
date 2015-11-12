@@ -42,7 +42,6 @@ angular.module('angularApp')
         method: 'GET',
         url: 'api/' + tsn,
       }).then(function(results) {
-        console.log(results);
         return results.data[0];
       });
     };
