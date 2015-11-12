@@ -9,10 +9,19 @@
 angular.module('angularApp')
   .directive('smallCard', function () {
     return {
-      template: '<div></div>',
+      templateUrl: 'scripts/directives/smallCard/smallCard.html',
       restrict: 'E',
-      link: function postLink(scope, element, attrs) {
-        element.text('this is the smallCard directive');
+      scope:{
+      	taxon : '='
+      },
+      controller: 'CardCtrl',
+      link: function(scope, el, attrs){
+      		scope.$watch('taxon', function(n, o){
+      			scope.getWiki(scope.taxon.complete_name)
+      				.then(function(results){
+      					scope.taxon.wiki = results;
+      				});
+      		});
+      	}
       }
-    };
   });

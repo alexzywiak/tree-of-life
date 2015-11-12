@@ -16,6 +16,7 @@ angular.module('angularApp')
     };
 
     var children = [];
+    var parent = {};
 
     var kingdoms = function() {
       return $http({
@@ -44,11 +45,22 @@ angular.module('angularApp')
       });
     };
 
+    var taxonParent = function(tsn){
+      return $http({
+        method: 'GET',
+        url: 'api/parent/' + tsn,
+      }).then(function(results) {
+        return results.data[0];
+      });
+    };
+
     return {
       kingdoms: kingdoms,
       taxonUnit: taxonUnit,
       taxonChildren: taxonChildren,
+      taxonParent: taxonParent,
       root: root,
-      children: children
+      children: children,
+      parent: parent
     }
   });

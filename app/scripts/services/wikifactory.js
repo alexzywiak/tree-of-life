@@ -30,7 +30,6 @@ angular.module('angularApp')
     }
 
     var getWiki = function(title) {
-      console.log(title);
       var url = buildQuery({
         titles: title,
         prop: "pageimages|extracts",

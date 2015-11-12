@@ -4,5 +4,20 @@
 
 .overlay{
   background-color: rgba(114,114,114,0.8);
+}
 
+.chip-large{
+	margin-top: 16px;
+	height: 72px;
+	line-height: 72px;
+	border-radius: 36px;
+}
+
+.chip-large img{
+	height: 72px;
+	width: 72px;
+}
+
+.chip-large span{
+	padding: 0 16px;
 }

@@ -1,6 +1,6 @@
 <div class="card large">
     <div class="card-image">
-        <img src="{{ taxon.wiki.thumbnail.source }}" alt="">
+        <img fallback-src ng-src="{{ taxon.wiki.thumbnail.source }}" alt="">
         <span class="card-title overlay">
             <span>{{ taxon.rank_name }}</span>
             <h4>{{ taxon.complete_name }}</h4>

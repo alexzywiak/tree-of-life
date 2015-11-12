@@ -13,6 +13,15 @@ angular.module('angularApp')
       restrict: 'E',
       scope: {
       	taxon: "="
+      },
+      controller: 'CardCtrl',
+      link: function(scope, el, attr){
+      	scope.$watch('taxon', function(){
+      		scope.getWiki(scope.taxon.complete_name)
+      			.then(function(result){
+      				scope.taxon.wiki = result;
+      			});
+      	});
       }
     };
   });

@@ -11,7 +11,9 @@ angular.module('angularApp')
   .controller('TaxonomyCtrl', function($scope, $stateParams, taxonFactory, wikiFactory) {
 
     angular.extend($scope, taxonFactory, wikiFactory);
-    
+
+    $scope.taxon = {};
+
     // Initialize
     if (!$stateParams.tsn || $stateParams.tsn === '0') {
 
@@ -25,6 +27,12 @@ angular.module('angularApp')
       $scope.taxonChildren(0)
         .then(function(results) {
           $scope.children = results;
+          _.each($scope.children, function(child, idx) {
+            $scope.getWiki(child.complete_name)
+              .then(function(data) {
+                $scope.children[idx].wiki = data;
+              });
+          });
         });
 
       // Search for specific tsn
@@ -33,18 +41,18 @@ angular.module('angularApp')
       // Set parent by tsn
       $scope.taxonUnit($stateParams.tsn)
         .then(function(result) {
+          console.log(result);
           $scope.taxon = result;
-
-          $scope.getWiki($scope.taxon.complete_name)
-            .then(function(data){
-              $scope.taxon.wiki = data;
-            });
         });
 
-      // Get all children
       $scope.taxonChildren($stateParams.tsn)
-        .then(function(results) {
-          $scope.children = results;
+        .then(function(result){
+          $scope.children = result;
+        });
+
+      $scope.taxonParent($stateParams.tsn)
+        .then(function(result) {
+          $scope.parent = result;
         });
     }
   });

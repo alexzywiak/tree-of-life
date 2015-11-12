@@ -1,6 +1,11 @@
 <div class="container">
-    <br>
-    <br>
+    <section>
+        <div class="row">
+            <div class="col s4 offset-s4">
+                <small-card taxon="parent"></small-card>
+            </div>
+        </div>
+    </section>
     <section>
         <div class="row">
             <div class="col s6 offset-s3">
@@ -10,10 +15,8 @@
     </section>
     <section>
         <div class="row">
-            <div ng-repeat="child in children" class="col s2">
-                <span>{{ child.rank_name }}</span>
-                <br>
-                <a href="#/taxonomy/{{child.tsn}}">{{child.complete_name}}</a>
+            <div ng-repeat="child in children" class="col s4">
+                <small-card taxon="child"></small-card>
             </div>
         </div>
     </section>

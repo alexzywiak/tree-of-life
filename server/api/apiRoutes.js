@@ -23,6 +23,14 @@ var children = function(tsn) {
   	);
 };
 
+var parent = function(tsn) {
+	return db.runQuery(
+	'SELECT complete_name, tu.tsn, tu.parent_tsn, tt.rank_name \
+  	FROM taxonomic_units tu, taxon_unit_types tt \
+  	WHERE tu.tsn=(select parent_tsn from taxonomic_units where tsn=?) && tt.rank_id=tu.rank_id && tt.kingdom_id=tu.kingdom_id;', [tsn]
+  	);
+};
+
 module.exports = function(app){
 	app.route('/')
 		.get(function(req, res){
@@ -43,6 +51,14 @@ module.exports = function(app){
 	app.route('/children/:tsn')
 		.get(function(req, res){
 			children(req.params.tsn)
+				.then(function(results){
+					res.send(results);
+				});
+		});
+
+	app.route('/parent/:tsn')
+		.get(function(req, res){
+			parent(req.params.tsn)
 				.then(function(results){
 					res.send(results);
 				});
