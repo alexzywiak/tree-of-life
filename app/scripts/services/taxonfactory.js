@@ -9,10 +9,20 @@
  */
 angular.module('angularApp')
   .factory('taxonFactory', function($http) {
-    
+
     var root = {
-        complete_name: 'Tree',
-        tsn: 0
+      complete_name: 'Tree',
+      tsn: 0
+    };
+
+    var Node = function(obj) {
+      for (var prop in obj) {
+        this[prop] = obj[prop];
+      }
+    };
+
+    Node.prototype.add = function(obj){
+      this.child = new Node(obj);
     };
 
     var children = [];
@@ -32,6 +42,7 @@ angular.module('angularApp')
         method: 'GET',
         url: 'api/' + tsn,
       }).then(function(results) {
+        console.log(results);
         return results.data[0];
       });
     };
@@ -45,7 +56,7 @@ angular.module('angularApp')
       });
     };
 
-    var taxonParent = function(tsn){
+    var taxonParent = function(tsn) {
       return $http({
         method: 'GET',
         url: 'api/parent/' + tsn,
@@ -55,6 +66,7 @@ angular.module('angularApp')
     };
 
     return {
+      Node: Node,
       kingdoms: kingdoms,
       taxonUnit: taxonUnit,
       taxonChildren: taxonChildren,

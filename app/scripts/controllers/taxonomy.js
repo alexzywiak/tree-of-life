@@ -13,6 +13,7 @@ angular.module('angularApp')
     angular.extend($scope, taxonFactory, wikiFactory);
 
     $scope.taxon = {};
+    $scope.hierarchy = {}
 
     // Initialize
     if (!$stateParams.tsn || $stateParams.tsn === '0') {
@@ -27,29 +28,24 @@ angular.module('angularApp')
       $scope.taxonChildren(0)
         .then(function(results) {
           $scope.children = results;
-          _.each($scope.children, function(child, idx) {
-            $scope.getWiki(child.complete_name)
-              .then(function(data) {
-                $scope.children[idx].wiki = data;
-              });
-          });
         });
 
       // Search for specific tsn
     } else {
 
-      // Set parent by tsn
+      // Set main unit by tsn
       $scope.taxonUnit($stateParams.tsn)
         .then(function(result) {
-          console.log(result);
           $scope.taxon = result;
         });
 
+      // Set Children
       $scope.taxonChildren($stateParams.tsn)
-        .then(function(result){
+        .then(function(result) {
           $scope.children = result;
         });
 
+      // Set parent
       $scope.taxonParent($stateParams.tsn)
         .then(function(result) {
           $scope.parent = result;

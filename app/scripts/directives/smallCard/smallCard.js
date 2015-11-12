@@ -7,21 +7,23 @@
  * # smallCard
  */
 angular.module('angularApp')
-  .directive('smallCard', function () {
+  .directive('smallCard', function() {
     return {
       templateUrl: 'scripts/directives/smallCard/smallCard.html',
       restrict: 'E',
-      scope:{
-      	taxon : '='
+      scope: {
+        taxon: '='
       },
       controller: 'CardCtrl',
-      link: function(scope, el, attrs){
-      		scope.$watch('taxon', function(n, o){
-      			scope.getWiki(scope.taxon.complete_name)
-      				.then(function(results){
-      					scope.taxon.wiki = results;
-      				});
-      		});
-      	}
+      link: function(scope, el, attrs) {
+        scope.$watch('taxon', function(n, o) {
+          if (scope.taxon && scope.taxon.complete_name) {
+            scope.getWiki(scope.taxon.complete_name)
+              .then(function(results) {
+                scope.taxon.wiki = results;
+              });
+          }
+        });
       }
+    }
   });

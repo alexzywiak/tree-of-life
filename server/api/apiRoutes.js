@@ -1,4 +1,5 @@
 var db = require('../config/db');
+var _ = require('underscore');
 
 // Returns all Kingdoms
 var kingdoms = function() {
@@ -8,59 +9,92 @@ var kingdoms = function() {
 // Get taxon unit
 var taxonUnit = function(tsn) {
   return db.runQuery(
-  	'SELECT tu.complete_name, tu.tsn, tu.parent_tsn, tt.rank_name \
+    'SELECT tu.complete_name, tu.tsn, tu.parent_tsn, tt.rank_name, h.hierarchy_string\
+  	FROM taxonomic_units tu, taxon_unit_types tt, hierarchy h\
+  	WHERE tu.tsn=? && tt.rank_id=tu.rank_id && tt.kingdom_id=tu.kingdom_id && h.tsn=tu.tsn;', [tsn]
+  );
+};
+
+var hierarchy = function(hierarchyString) {
+  var queryStr = 'SELECT tu.complete_name, tu.rank_id, tu.tsn, tu.parent_tsn, tt.rank_name \
   	FROM taxonomic_units tu, taxon_unit_types tt \
-  	WHERE tu.tsn=? && tt.rank_id=tu.rank_id && tt.kingdom_id=tu.kingdom_id;', [tsn]
-  	);
+  	WHERE tt.rank_id=tu.rank_id && tt.kingdom_id=tu.kingdom_id && (';
+
+  var tsn = _.reduce(hierarchyString.split('-'), function(memo, cur) {
+    if (memo === '') {
+      return ' tu.tsn=' + cur;
+    } else {
+      return memo + ' or tu.tsn=' + cur;
+    }
+  }, '');
+  queryStr += tsn + ') ORDER BY tu.rank_id ASC;';
+  return db.runQuery(queryStr);
 };
 
 // Gets all children of the current tsn
 var children = function(tsn) {
-	return db.runQuery(
-	'SELECT tu.complete_name, tu.tsn, tu.parent_tsn, tt.rank_name \
+  return db.runQuery(
+    'SELECT tu.complete_name, tu.tsn, tu.parent_tsn, tt.rank_name \
   	FROM taxonomic_units tu, taxon_unit_types tt \
   	WHERE tu.parent_tsn=? && tt.rank_id=tu.rank_id && tt.kingdom_id=tu.kingdom_id;', [tsn]
-  	);
+  );
 };
 
 var parent = function(tsn) {
-	return db.runQuery(
-	'SELECT complete_name, tu.tsn, tu.parent_tsn, tt.rank_name \
+  return db.runQuery(
+    'SELECT tu.complete_name, tu.tsn, tu.parent_tsn, tt.rank_name \
   	FROM taxonomic_units tu, taxon_unit_types tt \
   	WHERE tu.tsn=(select parent_tsn from taxonomic_units where tsn=?) && tt.rank_id=tu.rank_id && tt.kingdom_id=tu.kingdom_id;', [tsn]
-  	);
+  );
 };
 
-module.exports = function(app){
-	app.route('/')
-		.get(function(req, res){
-			kingdoms()
-				.then(function(results){
-					res.send(results);
-				});
-		});
+module.exports = function(app) {
+  app.route('/')
+    .get(function(req, res) {
+      kingdoms()
+        .then(function(results) {
+          res.send(results);
+        });
+    });
 
-	app.route('/:tsn')
-		.get(function(req, res){
-			taxonUnit(req.params.tsn)
-				.then(function(results){
-					res.send(results);
-				});
-		});
+  app.route('/:tsn')
+    .get(function(req, res) {
+      taxonUnit(req.params.tsn)
+        .then(function(results) {
 
-	app.route('/children/:tsn')
-		.get(function(req, res){
-			children(req.params.tsn)
-				.then(function(results){
-					res.send(results);
-				});
-		});
+        	if(results[0].hierarchy_string){
+        		hierarchy(results[0].hierarchy_string)
+        			.then(function(list){
+        				results[0].hierarchy = list;
+        				res.send(results);
+        			});
+        	} else {
+	          res.send(results);
+        	}
+        });
+    });
 
-	app.route('/parent/:tsn')
-		.get(function(req, res){
-			parent(req.params.tsn)
-				.then(function(results){
-					res.send(results);
-				});
-		});
+  app.route('/children/:tsn')
+    .get(function(req, res) {
+      children(req.params.tsn)
+        .then(function(results) {
+          res.send(results);
+        });
+    });
+
+  app.route('/parent/:tsn')
+    .get(function(req, res) {
+      parent(req.params.tsn)
+        .then(function(results) {
+          res.send(results);
+        });
+    });
+
+  // app.route('/hierarchy/:tsn')
+  //   .get(function(req, res) {
+  //     parent(req.params.tsn)
+  //       .then(function(results) {
+  //         res.send(results);
+  //       });
+  //   });
 }
