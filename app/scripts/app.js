@@ -19,6 +19,11 @@ angular
     $urlRouterProvider.otherwise('/taxonomy/0');
 
     $stateProvider
+      .state('graph', {
+        url: '/graph',
+        templateUrl: 'views/graph.html',
+        controller: 'TaxonomyCtrl'
+      })
       .state('taxonomy', {
         url: '/taxonomy/:tsn',
         templateUrl: 'views/taxonomy.html',
