@@ -19,7 +19,7 @@ angular.module('angularApp')
     if (!$stateParams.tsn || $stateParams.tsn === '0') {
 
       $scope.taxon = {
-        complete_name: 'Tree',
+        complete_name: 'Tree of Life',
         rank_name: 'All the Life.  Ever',
         tsn: 0
       };

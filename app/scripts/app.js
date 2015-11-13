@@ -20,7 +20,7 @@ angular
 
     $stateProvider
       .state('graph', {
-        url: '/graph',
+        url: '/graph/:tsn',
         templateUrl: 'views/graph.html',
         controller: 'TaxonomyCtrl'
       })

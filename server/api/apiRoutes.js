@@ -1,5 +1,6 @@
 var db = require('../config/db');
 var _ = require('underscore');
+var Promise = require('bluebird');
 
 // Returns all Kingdoms
 var kingdoms = function() {
@@ -10,15 +11,15 @@ var kingdoms = function() {
 var taxonUnit = function(tsn) {
   return db.runQuery(
     'SELECT tu.complete_name, tu.tsn, tu.parent_tsn, tt.rank_name, h.hierarchy_string\
-  	FROM taxonomic_units tu, taxon_unit_types tt, hierarchy h\
-  	WHERE tu.tsn=? && tt.rank_id=tu.rank_id && tt.kingdom_id=tu.kingdom_id && h.tsn=tu.tsn;', [tsn]
+    FROM taxonomic_units tu, taxon_unit_types tt, hierarchy h\
+    WHERE tu.tsn=? && tt.rank_id=tu.rank_id && tt.kingdom_id=tu.kingdom_id && h.tsn=tu.tsn;', [tsn]
   );
 };
 
 var hierarchy = function(hierarchyString) {
   var queryStr = 'SELECT tu.complete_name, tu.rank_id, tu.tsn, tu.parent_tsn, tt.rank_name \
-  	FROM taxonomic_units tu, taxon_unit_types tt \
-  	WHERE tt.rank_id=tu.rank_id && tt.kingdom_id=tu.kingdom_id && (';
+    FROM taxonomic_units tu, taxon_unit_types tt \
+    WHERE tt.rank_id=tu.rank_id && tt.kingdom_id=tu.kingdom_id && (';
 
   var tsn = _.reduce(hierarchyString.split('-'), function(memo, cur) {
     if (memo === '') {
@@ -35,16 +36,24 @@ var hierarchy = function(hierarchyString) {
 var children = function(tsn) {
   return db.runQuery(
     'SELECT tu.complete_name, tu.tsn, tu.parent_tsn, tt.rank_name \
-  	FROM taxonomic_units tu, taxon_unit_types tt \
-  	WHERE tu.parent_tsn=? && tt.rank_id=tu.rank_id && tt.kingdom_id=tu.kingdom_id;', [tsn]
+    FROM taxonomic_units tu, taxon_unit_types tt \
+    WHERE tu.parent_tsn=? && tt.rank_id=tu.rank_id && tt.kingdom_id=tu.kingdom_id;', [tsn]
   );
 };
 
 var parent = function(tsn) {
   return db.runQuery(
     'SELECT tu.complete_name, tu.tsn, tu.parent_tsn, tt.rank_name \
-  	FROM taxonomic_units tu, taxon_unit_types tt \
-  	WHERE tu.tsn=(select parent_tsn from taxonomic_units where tsn=?) && tt.rank_id=tu.rank_id && tt.kingdom_id=tu.kingdom_id;', [tsn]
+    FROM taxonomic_units tu, taxon_unit_types tt \
+    WHERE tu.tsn=(select parent_tsn from taxonomic_units where tsn=?) && tt.rank_id=tu.rank_id && tt.kingdom_id=tu.kingdom_id;', [tsn]
+  );
+};
+
+var siblings = function(tsn) {
+  return db.runQuery(
+    'SELECT tu.complete_name, tu.tsn, tu.parent_tsn, tt.rank_name \
+    FROM taxonomic_units tu, taxon_unit_types tt \
+    WHERE tu.parent_tsn=(select parent_tsn from taxonomic_units where tsn=?) && tt.rank_id=tu.rank_id && tt.kingdom_id=tu.kingdom_id;', [tsn]
   );
 };
 
@@ -62,15 +71,15 @@ module.exports = function(app) {
       taxonUnit(req.params.tsn)
         .then(function(results) {
 
-        	if(results[0].hierarchy_string){
-        		hierarchy(results[0].hierarchy_string)
-        			.then(function(list){
-        				results[0].hierarchy = list;
-        				res.send(results);
-        			});
-        	} else {
-	          res.send(results);
-        	}
+          if (results[0].hierarchy_string) {
+            hierarchy(results[0].hierarchy_string)
+              .then(function(list) {
+                results[0].hierarchy = list;
+                res.send(results);
+              });
+          } else {
+            res.send(results);
+          }
         });
     });
 
@@ -90,11 +99,11 @@ module.exports = function(app) {
         });
     });
 
-  // app.route('/hierarchy/:tsn')
-  //   .get(function(req, res) {
-  //     parent(req.params.tsn)
-  //       .then(function(results) {
-  //         res.send(results);
-  //       });
-  //   });
-}
+  app.route('/hierarchy/:string')
+    .get(function(req, res) {
+      hierarchy(req.params.string)
+        .then(function(result){
+          res.send(result);
+        });
+    });
+};
