@@ -10,24 +10,11 @@
 angular.module('angularApp')
   .factory('taxonFactory', function($http) {
 
-    var root = {
-      complete_name: 'Tree',
-      tsn: 0
-    };
-
-    var Node = function(obj) {
-      for (var prop in obj) {
-        this[prop] = obj[prop];
-      }
-    };
-
-    Node.prototype.add = function(obj) {
-      this.child = new Node(obj);
-    };
-
+    // Initializes values for scopes
     var children = [];
     var parent = {};
 
+    // Returns all kingdoms
     var kingdoms = function() {
       return $http({
         method: 'GET',
@@ -37,6 +24,7 @@ angular.module('angularApp')
       });
     };
 
+    // Returns specificed taxon unit
     var taxonUnit = function(tsn) {
       return $http({
         method: 'GET',
@@ -46,6 +34,7 @@ angular.module('angularApp')
       });
     };
 
+    // Returns all direct children
     var taxonChildren = function(tsn) {
       return $http({
         method: 'GET',
@@ -55,6 +44,7 @@ angular.module('angularApp')
       });
     };
 
+    // Returns direct parent
     var taxonParent = function(tsn) {
       return $http({
         method: 'GET',
@@ -64,6 +54,7 @@ angular.module('angularApp')
       });
     };
 
+    // Returns a flat array of all ancestors
     var hierarchy = function(string) {
       return $http({
         method: 'GET',
@@ -82,6 +73,8 @@ angular.module('angularApp')
         })
         .then(function(hierarchy) {
 
+          // Returns a flat array of all elements in the 
+          // hierarchy string with their children
           return new Promise(function(resolve, reject) {
             var i = 0;
             var results = [];
@@ -109,11 +102,17 @@ angular.module('angularApp')
 
           });
         })
+        // Zips up the results into nested objects
         .then(function(result) {
           var last,
               next;
           while(result.length > 1){
             last = result.pop();
+
+            // Marks the node that was passed to buildTree
+            if(last.tsn === tsn){
+              last.currentNode = true;
+            }
 
             next = result[result.length - 1];
 
@@ -135,7 +134,6 @@ angular.module('angularApp')
       taxonChildren: taxonChildren,
       taxonParent: taxonParent,
       buildTree: buildTree,
-      root: root,
       children: children,
       parent: parent
     }

@@ -15,7 +15,7 @@ angular.module('angularApp')
       link: function(scope, element, attrs) {
        
           scope.$watch('root', function(){
-            if(scope.root.children){
+            if(scope.root && scope.root.children){
               console.log(scope.root);
               draw();
             }
@@ -51,13 +51,20 @@ angular.module('angularApp')
           var node = svg.selectAll(".node")
             .data(nodes)
             .enter().append("g")
-            .attr("class", "node")
+            .attr("class", function(d){
+              var className = 'node'
+              if(d.tsn === +scope.tsn){
+                className += " current-node";
+                console.log(scope.tsn, d.tsn);
+              }
+              return className;
+            })
             .attr("transform", function(d) {
               return "translate(" + d.y + "," + d.x + ")";
             })
 
           node.append("circle")
-            .attr("r", 4.5);
+            .attr("r", 9);
 
           node.append("text")
             .attr("dx", function(d) {
@@ -71,7 +78,6 @@ angular.module('angularApp')
               return d.complete_name;
             });
         }
-
 
         d3.select(self.frameElement).style("height", height + "px");
       }

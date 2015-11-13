@@ -11,7 +11,9 @@ angular.module('angularApp')
   .controller('TreeCtrl', function ($scope, $stateParams, taxonFactory) {
     angular.extend($scope, taxonFactory);
 
-    $scope.buildTree($stateParams.tsn)
+    $scope.tsn = $stateParams.tsn;
+
+    $scope.buildTree($scope.tsn)
     	.then(function(root){
     		$scope.root = root[0];
     	});
