@@ -1,6 +1,8 @@
 var Promise = require('bluebird');
 var sqlite3 = require('sqlite3').verbose();
-var db = new sqlite3.Database(__dirname + '/itisSqlite/ITIS.sqlite');
+
+var db = new sqlite3.Database(__dirname + '/sqlite/ITIS.sqlite');
+
 
 module.exports = {
   runQuery: function(query, data) {
