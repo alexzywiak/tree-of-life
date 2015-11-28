@@ -1,19 +1,14 @@
-var mysql = require('mysql');
 var Promise = require('bluebird');
-
-var db = mysql.createConnection(process.env.JAWSDB_URL || {
-  host: 'localhost',
-  user: 'root',
-  database: 'ITIS'
-});
-
-db.connect();
+var sqlite3 = require('sqlite3').verbose();
+var db = new sqlite3.Database(__dirname + '/itisSqlite/ITIS.sqlite');
 
 module.exports = {
   runQuery: function(query, data) {
     data = data || [];
+    console.log(query, data);
     return new Promise(function(resolve, reject) {
-      db.query(query, data, function(err, rows, fields) {
+      db.all(query, data, function(err, rows) {
+        console.log(rows);
         if (err) {
           reject(err)
         }

@@ -12,14 +12,14 @@ var taxonUnit = function(tsn) {
   return db.runQuery(
     'SELECT tu.complete_name, tu.tsn, tu.parent_tsn, tt.rank_name, h.hierarchy_string\
     FROM taxonomic_units tu, taxon_unit_types tt, hierarchy h\
-    WHERE tu.tsn=? && tt.rank_id=tu.rank_id && tt.kingdom_id=tu.kingdom_id && h.tsn=tu.tsn;', [tsn]
+    WHERE tu.tsn=? AND tt.rank_id=tu.rank_id AND tt.kingdom_id=tu.kingdom_id AND h.tsn=tu.tsn;', [tsn]
   );
 };
 
 var hierarchy = function(hierarchyString) {
   var queryStr = 'SELECT tu.complete_name, tu.rank_id, tu.tsn, tu.parent_tsn, tt.rank_name \
     FROM taxonomic_units tu, taxon_unit_types tt \
-    WHERE tt.rank_id=tu.rank_id && tt.kingdom_id=tu.kingdom_id && (';
+    WHERE tt.rank_id=tu.rank_id AND tt.kingdom_id=tu.kingdom_id AND (';
 
   var tsn = _.reduce(hierarchyString.split('-'), function(memo, cur) {
     if (memo === '') {
@@ -37,7 +37,7 @@ var children = function(tsn) {
   return db.runQuery(
     'SELECT tu.complete_name, tu.tsn, tu.parent_tsn, tt.rank_name \
     FROM taxonomic_units tu, taxon_unit_types tt \
-    WHERE tu.parent_tsn=? && tt.rank_id=tu.rank_id && tt.kingdom_id=tu.kingdom_id;', [tsn]
+    WHERE tu.parent_tsn=? AND tt.rank_id=tu.rank_id AND tt.kingdom_id=tu.kingdom_id;', [tsn]
   );
 };
 
@@ -45,7 +45,7 @@ var parent = function(tsn) {
   return db.runQuery(
     'SELECT tu.complete_name, tu.tsn, tu.parent_tsn, tt.rank_name \
     FROM taxonomic_units tu, taxon_unit_types tt \
-    WHERE tu.tsn=(select parent_tsn from taxonomic_units where tsn=?) && tt.rank_id=tu.rank_id && tt.kingdom_id=tu.kingdom_id;', [tsn]
+    WHERE tu.tsn=(select parent_tsn from taxonomic_units where tsn=?) AND tt.rank_id=tu.rank_id AND tt.kingdom_id=tu.kingdom_id;', [tsn]
   );
 };
 
@@ -53,7 +53,7 @@ var siblings = function(tsn) {
   return db.runQuery(
     'SELECT tu.complete_name, tu.tsn, tu.parent_tsn, tt.rank_name \
     FROM taxonomic_units tu, taxon_unit_types tt \
-    WHERE tu.parent_tsn=(select parent_tsn from taxonomic_units where tsn=?) && tt.rank_id=tu.rank_id && tt.kingdom_id=tu.kingdom_id;', [tsn]
+    WHERE tu.parent_tsn=(select parent_tsn from taxonomic_units where tsn=?) AND tt.rank_id=tu.rank_id AND tt.kingdom_id=tu.kingdom_id;', [tsn]
   );
 };
 
