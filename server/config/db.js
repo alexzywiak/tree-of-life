@@ -1,7 +1,7 @@
 var mysql = require('mysql');
 var Promise = require('bluebird');
 
-var db = mysql.createConnection({
+var db = mysql.createConnection(process.env.JAWSDB_URL || {
   host: 'localhost',
   user: 'root',
   database: 'ITIS'
