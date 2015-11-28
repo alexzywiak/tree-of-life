@@ -33,10 +33,10 @@
     display: block;
 }
 
-.border-right {
+/*.border-right {
     height: 16px;
     border-right: 4px solid #4caf50;
-}
+}*/
 
 /* Graph */
 .node circle {
