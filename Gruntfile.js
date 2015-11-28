@@ -385,6 +385,9 @@ module.exports = function(grunt) {
     grunt.task.run(['serve:' + target]);
   });
 
+  // Development Tasks
+  grunt.registerTask('heroku', ['build']);
+
   grunt.registerTask('test', [
     'clean:server',
     'concurrent:test',
