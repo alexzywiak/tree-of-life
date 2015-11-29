@@ -1,5 +1,3 @@
-'use strict';
-
 /**
  * @ngdoc directive
  * @name angularApp.directive:treeGraph.js
@@ -8,6 +6,7 @@
  */
 angular.module('angularApp')
   .directive('treegraph', ['d3', function(d3) {
+    'use strict';
     return {
       template: '<div></div>',
       restrict: 'E',
@@ -16,7 +15,6 @@ angular.module('angularApp')
        
           scope.$watch('root', function(){
             if(scope.root && scope.root.children){
-              console.log(scope.root);
               draw();
             }
           }); 
@@ -52,16 +50,15 @@ angular.module('angularApp')
             .data(nodes)
             .enter().append("g")
             .attr("class", function(d){
-              var className = 'node'
+              var className = 'node';
               if(d.tsn === +scope.tsn){
                 className += " current-node";
-                console.log(scope.tsn, d.tsn);
               }
               return className;
             })
             .attr("transform", function(d) {
               return "translate(" + d.y + "," + d.x + ")";
-            })
+            });
 
           node.append("circle")
             .attr("r", 9);
@@ -77,7 +74,7 @@ angular.module('angularApp')
             .text(function(d) {
               return d.complete_name;
             });
-        }
+        };
 
         d3.select(self.frameElement).style("height", height + "px");
       }

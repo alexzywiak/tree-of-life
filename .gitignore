@@ -1,7 +1,6 @@
 ### node etc ###
 
-apitest.html
-wiki.txt
+server/config/sqlite
 
 # Logs
 logs

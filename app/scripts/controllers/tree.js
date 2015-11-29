@@ -1,4 +1,4 @@
-'use strict';
+
 
 /**
  * @ngdoc function
@@ -9,6 +9,7 @@
  */
 angular.module('angularApp')
   .controller('TreeCtrl', function ($scope, $stateParams, taxonFactory) {
+    'use strict';
     angular.extend($scope, taxonFactory);
 
     $scope.tsn = $stateParams.tsn;
