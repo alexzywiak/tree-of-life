@@ -11,6 +11,6 @@ var port = process.env.PORT || 4568;
 
 app.listen(port);
 
-console.log('Making Digital Magic on at http://localhost:' + port)
+console.log('Making Digital Magic on at http://localhost:' + port);
 
 module.exports = app;

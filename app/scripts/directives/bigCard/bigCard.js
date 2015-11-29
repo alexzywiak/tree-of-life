@@ -1,4 +1,4 @@
-'use strict';
+
 
 /**
  * @ngdoc directive
@@ -8,6 +8,7 @@
  */
 angular.module('angularApp')
   .directive('bigCard', function () {
+    'use strict';
     return {
       templateUrl: 'scripts/directives/bigCard/bigCard.html',
       restrict: 'E',

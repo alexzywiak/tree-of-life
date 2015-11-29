@@ -1,5 +1,3 @@
-'use strict';
-
 /**
  * @ngdoc directive
  * @name angularApp.directive:hierarchy
@@ -8,6 +6,7 @@
  */
 angular.module('angularApp')
   .directive('hierarchy', function () {
+    'use strict';
     return {
       templateUrl: 'scripts/directives/hierarchy/hierarchy.html',
       restrict: 'E',

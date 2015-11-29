@@ -6,14 +6,13 @@
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width">
     <!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
-    <!-- build:css(.) styles/vendor.css -->
+    <link href="http://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <!-- bower:css -->
     <link rel="stylesheet" href="lib/Materialize/bin/materialize.css" />
     <!-- endbower -->
-    <!-- endbuild -->
-    <!-- build:css(.tmp) styles/main.css -->
-    <link rel="stylesheet" href="styles/main.css">
-    <!-- endbuild -->
+    
+    <link rel="stylesheet" href="dist/styles/style.min.css">
+
   </head>
   <body ng-app="angularApp">
     <!--[if lt IE 7]>
@@ -58,21 +57,6 @@
     <script src="lib/d3/d3.js"></script>
     <!-- endbower -->
     <!-- endbuild -->
-
-        <!-- build:js({.tmp,app}) scripts/scripts.js -->
-        <script src="scripts/app.js"></script>
-        <script src="scripts/controllers/main.js"></script>
-        <script src="scripts/services/taxonfactory.js"></script>
-        <script src="scripts/controllers/taxonomy.js"></script>
-        <script src="scripts/services/wikifactory.js"></script>
-        <script src="scripts/directives/bigCard/bigcard.js"></script>
-        <script src="scripts/directives/smallCard/smallcard.js"></script>
-        <script src="scripts/controllers/card.js"></script>
-        <script src="scripts/directives/fallbacksrc.js"></script>
-        <script src="scripts/directives/hierarchy/hierarchy.js"></script>
-        <script src="scripts/directives/treegraph.js"></script>
-        <script src="scripts/services/d3.js"></script>
-        <script src="scripts/controllers/tree.js"></script>
-        <!-- endbuild -->
+    <script src="dist/scripts/app.min.js"></script>
 </body>
 </html>

@@ -1,4 +1,4 @@
-'use strict';
+
 
 /**
  * @ngdoc function
@@ -9,5 +9,6 @@
  */
 angular.module('angularApp')
   .controller('CardCtrl', function ($scope, wikiFactory) {
+  	'use strict';
     angular.extend($scope, wikiFactory);
   });

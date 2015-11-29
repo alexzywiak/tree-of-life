@@ -1,5 +1,3 @@
-'use strict';
-
 /**
  * @ngdoc service
  * @name angularApp.wikiFactory
@@ -9,7 +7,7 @@
  */
 angular.module('angularApp')
   .factory('wikiFactory', function($http) {
-
+    'use strict';
     var wikiUrl = "http://en.wikipedia.org/w/api.php?action=query&format=json&callback=JSON_CALLBACK";
 
     var buildQuery = function(obj) {
@@ -49,5 +47,5 @@ angular.module('angularApp')
 
     return {
       getWiki: getWiki
-    }
+    };
   });

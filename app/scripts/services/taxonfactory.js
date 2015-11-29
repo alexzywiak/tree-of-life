@@ -1,5 +1,3 @@
-'use strict';
-
 /**
  * @ngdoc service
  * @name angularApp.taxonFactory
@@ -9,7 +7,7 @@
  */
 angular.module('angularApp')
   .factory('taxonFactory', function($http) {
-
+    'use strict';
     // Initializes values for scopes
     var children = [];
     var parent = {};
@@ -115,12 +113,13 @@ angular.module('angularApp')
             }
 
             next = result[result.length - 1];
-
-            _.each(next.children, function(child, idx){
+            var child;
+            for(var i = 0; i < next.children.length; i++){
+              child = next.children[i];
               if(child.tsn === last.tsn){
-                next.children[idx] = last;
+                next.children[i] = last;
               }
-            });
+            }
           }
 
           return result;
@@ -136,5 +135,5 @@ angular.module('angularApp')
       buildTree: buildTree,
       children: children,
       parent: parent
-    }
+    };
   });

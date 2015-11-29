@@ -1,5 +1,3 @@
-'use strict';
-
 /**
  * @ngdoc directive
  * @name angularApp.directive:smallCard
@@ -8,6 +6,7 @@
  */
 angular.module('angularApp')
   .directive('smallCard', function() {
+    'use strict';
     return {
       templateUrl: 'scripts/directives/smallCard/smallCard.html',
       restrict: 'E',
@@ -25,5 +24,5 @@ angular.module('angularApp')
           }
         });
       }
-    }
+    };
   });

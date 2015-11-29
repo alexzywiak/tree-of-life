@@ -1,5 +1,3 @@
-'use strict';
-
 /**
  * @ngdoc function
  * @name angularApp.controller:TaxonomyCtrl
@@ -9,11 +7,11 @@
  */
 angular.module('angularApp')
   .controller('TaxonomyCtrl', function($scope, $stateParams, taxonFactory, wikiFactory) {
-
+    'use strict';
     angular.extend($scope, taxonFactory, wikiFactory);
 
     $scope.taxon = {};
-    $scope.hierarchy = {}
+    $scope.hierarchy = {};
 
     // Initialize
     if (!$stateParams.tsn || $stateParams.tsn === '0') {

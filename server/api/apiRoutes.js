@@ -1,6 +1,5 @@
 var db = require('../config/db');
 var _ = require('underscore');
-var Promise = require('bluebird');
 
 // Returns all Kingdoms
 var kingdoms = function() {
