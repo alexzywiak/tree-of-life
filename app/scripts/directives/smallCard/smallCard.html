@@ -1,5 +1,20 @@
 <a ui-sref="taxonomy({ tsn:taxon.tsn })">
-    <div class="chip chip-large green z-depth-2 waves-effect waves-light btn">
-        <img fallback-src ng-src="{{ taxon.wiki.thumbnail.source }}"><span>{{ taxon.complete_name }}</span>
+    <div class="col s12 small-card">
+        <div class="card-panel grey lighten-5 z-depth-1">
+            <div class="row valign-wrapper">
+                <div class="col s4">
+                    <img fallback-src ng-src="{{ taxon.wiki.thumbnail.source }}">
+                    <!-- notice the "circle" class -->
+                </div>
+                <div class="col s8">
+                	<div class="black-text">
+	                	{{ taxon.rank_name }}
+	              	</div>
+                  <div class="black-text bold-text">
+	                	{{ taxon.complete_name }}
+	              	</div>
+                </div>
+            </div>
+        </div>
     </div>
 </a>

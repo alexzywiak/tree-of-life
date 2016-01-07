@@ -9,8 +9,8 @@ require('./config/middleware.js')(app, express);
 
 var port = process.env.PORT || 4568;
 
-app.listen(port, '104.131.49.98');
+app.listen(port);
 
-console.log('Making Digital Magic on 104.131.49.98' + port);
+console.log('Making Digital Magic on ' + port);
 
 module.exports = app;

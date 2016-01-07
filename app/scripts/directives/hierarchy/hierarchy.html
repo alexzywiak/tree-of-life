@@ -1,4 +1,22 @@
-<div class="row">
+<ul class="hierarchy-list">
+	<li>
+	    <a href="#/taxonomy/0">
+	        <div>
+	        	<div>Root of Life</div>
+	        	<div class="bold-text">All Living Things</div>
+	        </div>
+	    </a>
+	</li>
+	<li ng-repeat="rank in list">
+	    <a href="#/taxonomy/{{rank.tsn}}">
+	        <div>
+	        	<div>{{rank.rank_name}}</div>
+	        	<div class="bold-text">{{rank.complete_name}}</div>
+	        </div>
+	    </a>
+	</li>
+</ul>
+<!-- <div class="row">
     <div ng-repeat="rank in list" class="col s12 center-align">
         <a href="#/taxonomy/{{rank.tsn}}">
             <h6>{{rank.rank_name}}</h6>
@@ -6,4 +24,4 @@
         </a>
         <i class="material-icons">navigation</i>
     </div>
-</div>
+</div> -->

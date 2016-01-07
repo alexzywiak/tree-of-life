@@ -1,3 +1,8 @@
+.bold-text{
+  font-size: 1.25em;
+  font-weight: 400;
+}
+
 .overflow-scroll {
     overflow: auto !important;
 }
@@ -59,5 +64,43 @@
   fill: none;
   stroke: #ccc;
   stroke-width: 2px;
+}
+
+.hierarchy-list li{
+  display: inline;
+  margin-right: 25px;
+}
+
+.hierarchy-list li a > div{
+  display: inline-block;
+}
+
+.small-card{
+  overflow: hidden;
+}
+
+.small-card .card-panel{
+  padding: 0;
+  margin: 0 0 0.25rem 0;
+}
+
+.small-card img{
+  width:100px;
+  height:100px;
+  overflow:hidden;
+}
+
+.small-card .row{
+  margin: 0;
+}
+
+.small-card .col{
+  margin: 0;
+  padding: 0;
+}
+
+.card.large{
+  margin: 0;
+  height: 800px;
 }
 
