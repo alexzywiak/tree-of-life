@@ -9,7 +9,7 @@ angular.module('angularApp')
     'use strict';
     var fallbackSrc = {
       link: function postLink(scope, el, attrs) {
-        if (attrs.ngSrc === '') {
+        if (attrs.ngSrc === undefined) {
           el.attr('src', attrs.fallbackSrc || 'images/tree.png');
         }
       }

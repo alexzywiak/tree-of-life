@@ -1,4 +1,21 @@
 <div class="container">
+    
+        <div class="row">
+            <div class="col s12">
+                <hierarchy list="taxon.hierarchy"></hierarchy>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col s6">
+                <big-card taxon="taxon"></big-card>
+            </div>
+            <div class="col s6">
+                <small-card ng-repeat="child in children" taxon="child"></small-card>
+            </div>
+        </div>
+</div>
+
+<!-- <div class="container">
     <div class="row">
         <aside>
             <div class="col s2">
@@ -36,3 +53,4 @@
         </div>
     </div>
 </div>
+ -->
